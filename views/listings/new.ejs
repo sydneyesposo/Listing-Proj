@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/app.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>Add New Listing </title>
+</head>
+<body>
+    
+    
+    <div class="container">
+    <h2>Add a New Listing</h2>
+
+    <form action="/listings" method="post">
+       
+        <div class="input-field">
+            <label for="category">Select Category</label>
+            <br>
+            <select name="category" id="category"  class="browser-default">
+                <% for(let category of categories) { %>
+                    <option value="<%=category%>"><%=category%> </option>
+                <% } %> 
+            </select>
+        </div>
+
+        <div>
+            <label for="name">Listing Name</label>
+            <input type="text" name="name" id="name" placeholder="Listing Name">
+        </div>
+        <br>
+        <div>
+            <label for="price">Listing Price</label>
+            <input type="number" name="price" id="price" placeholder="Listing price">
+        </div>
+        <br>
+        <div>
+            <input type="text" name="address" id="address" placeholder="Address">
+        </div>
+        <br>
+        <input type="text" name="description" id="description" placeholder="Description" > 
+        <br>
+        <input type="hidden" name="date" value="<%= new Date();%>"> 
+        <button class="btn btn-success">Submit</button>
+        <a href="/listings">View All </a>
+
+
+    </form>
+</div>
+</body>
+</html>

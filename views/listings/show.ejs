@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/app.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title><%= listing.name %> </title>
+</head>
+<body>
+
+    <style> 
+        #map {
+            height: 400px;
+            width: 400px;
+        } 
+        </style>
+
+    <nav class="nav center-align">
+        <a class="nav-link active" href="/"> DigiHouse Corp |</a>
+       <a class="nav-link" href="login">Log in | </a>
+        <a class="nav-link" href="signup">Sign up</a> 
+      </nav>
+
+    <div class="container center-align"> 
+            <div class="col 14 m6 s12">
+                <h4> <%= listing.name %> (<%= listing.category %>)  </h4>
+                <p>Location: <%= listing.address %></p>
+                <p>  Price: P<%= listing.price %> </p>
+                <p> <%= listing.description %></p>
+                <p>Date Posted: <%= listing.date %></p>
+                <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="" class="card responsive-img" width="50%" height="50%"> 
+                 <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80" alt="" class="card responsive-img"> 
+                <div id="map" class="center-align"></div>
+
+               <br>
+               <a href="/listings">View All </a>
+    <a href="/listings/<%= listing._id %>/updateListing">Edit</a>
+    <br>
+                <label for="txta1">Reviews</label>
+                <textarea class="materialize-textarea" name="reviews" id="" cols="50" rows="30"></textarea>
+                <button class=""> Post</button>
+    </div>
+</div>
+
+<br>
+
+<script>
+    function initMap() {
+        var options = {
+            zoom: 15, 
+            center: {lat: 14.5409, lng: 121.0503}
+        }
+        var map = new 
+        google.maps.Map(document.getElementById('map'), options);
+    
+
+    addMarker({
+    coords: {lat: 14.5409, lng: 121.0503},
+    iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+    });
+    addMarker({coords: {lat: 14.5464, lng: 121.0378}});
+
+    function addMarker(props){
+        var marker = new google.maps.Marker({
+            position: props.coords,
+            map: map,
+        });
+
+        if(props.iconImage){
+            marker.setIcon(props.iconImage);
+        }
+    }
+}
+
+</script>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoVw5X3OodF23ulZ_GZhfubBTOwksecg4&callback=initMap"> </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/app.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title><%= listing.name %> </title>
+</head>
+<body>
+
+    <div class="container center-align"> 
+    <h1>Edit a listing</h1>
+
+    <form action="/listings/<%= listing._id %>?_method=PUT " method="post">
+
+        <div class="input-field">
+            <label for="category">Select Category</label>
+            <br>
+            <select name="category" id="category"  class="browser-default">
+                <% for(let category of categories) { %>
+                    <option value="<%=category%>" <%=listing.category === category ? 'selected': ''%>><%=category%> </option>
+                <% } %> 
+            </select>
+        </div>
+
+        <br>
+        <div>
+            <label for="name">listing Name</label>
+            <input type="text" name="name" id="name" placeholder="listing Name" value="<%= listing.name %>">
+        </div>
+        <br>
+        <div>
+            <label for="price">listing Price</label>
+            <input type="number" name="price" id="price" placeholder="listing price" value="<%= listing.price %>">
+        </div>
+        <br>
+        <div>
+            <input type="text" name="address" id="address" value="<%= listing.address %>"> 
+        </div>
+        <br>
+        <input type="text" name="description" id="description" value="<%= listing.description %>" > 
+        <br>
+        <input type="text" name="date" value="<%= listing.date %>"> 
+    <button class="btn btn-success">Update</button>
+    </form>
+<br>
+    <a  href="/listings/<%=listing._id%>">Cancel</a>
+</div>
+
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+        
+   </script>
+</body>
+</html>

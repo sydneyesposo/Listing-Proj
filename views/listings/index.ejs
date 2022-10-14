@@ -1,0 +1,49 @@
+<%- include('header') %>
+
+<body>
+
+
+    <nav>
+        <div class="nav-wrapper">
+          <a href="" class="brand-logo">Logo</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/listings">DigiHouse Corp</a></li>
+            <li><a href="/listings/login">Login </a></li>
+            <li><a href="listings/reg">Sign up</a></li>
+          </ul>
+        </div>
+      </nav>
+     
+      
+     <br>
+     <br>
+     <div class="container mt-5">
+      <h1>WElcome to login and Register System!</h1>
+      <a href="/login" class="btn btn-primary">Login</a>
+      <a href="/register" class="btn btn-danger">Register</a>
+  </div>
+     <br>
+    <div class="container center-align">
+    <h3>All Listings</h3>
+    <a href="/listings/new">Add New Listing</a>
+
+    <ul>
+        <% for(let listing of listings) { %> 
+            <li>
+                <h4> <a href="/listings/<%= listing.id %> " ><%= listing.name %></a> </h4>
+                <div class="col 14 m6 s12">
+                    <img src="https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="" class="card responsive-img" width="50%" height="50%"> 
+                    </div>
+            </li>
+        <% } %> 
+    </ul>
+</div>
+    
+
+  
+
+
+   
+</body>
+</body>
+</html>
