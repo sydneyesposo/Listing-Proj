@@ -3,7 +3,13 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const Listing = require('./models/listing');
+const User = require("./models/listing");
 const methodOverride = require('method-override');
+const cookieSession = require("cookie-session");
+const bcrypt = require("bcrypt");
+const authenticateUser = require("./middlewares/authenticateUser");
+
+
 
 mongoose.connect('mongodb://localhost:27017/dblisting')
     .then(() => {
@@ -33,25 +39,81 @@ const categories = ['Residential', 'Agricultural', 'Commercial'];
 
 // route for serving frontend files
 app
-  .get("/", (req, res) => {
-    res.render("index");
+  .get("/listings", (req, res) => {
+    res.render("listings/index");
   })
-  .get("/login", (req, res) => {
-    res.render("login");
+  .get("/listings/login", (req, res) => {
+    res.render("listings/login");
   })
-  .get("/register", (req, res) => {
-    res.render("register");
+  .get("/listings/register", (req, res) => {
+    res.render("listings/register");
   })
 
   .get("/listings", authenticateUser, (req, res) => {
     res.render("listings/index", { user: req.session.user });
   });
   
-//Login
-app.get('/listings/login',(req, res) => {
-    res.render('listings/login');
-    console.log("Hi");
-    })
+  // route for handling post requirests
+app
+.post("/listings/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  // check for missing filds
+  if (!email || !password) return res.send("Please enter all the fields");
+
+  const doesUserExits = await User.findOne({ email });
+
+  if (!doesUserExits) return res.send("invalid username or password");
+
+  const doesPasswordMatch = await bcrypt.compare(
+    password,
+    doesUserExits.password
+  );
+
+  if (!doesPasswordMatch) return res.send("invalid useranme or password");
+
+  // else he\s logged in
+  req.session.user = {
+    email,
+  };
+
+  res.redirect("listings/index");
+})
+.post("/listings/register", async (req, res) => {
+  const { email, password } = req.body;
+// check for missing filds
+if (!email || !password) return res.send("Please enter all the fields");
+
+const doesUserExitsAlreay = await User.findOne({ email });
+
+if (doesUserExitsAlreay) return res.send("A user with that email already exits please try another one!");
+
+// lets hash the password
+const hashedPassword = await bcrypt.hash(password, 12);
+const latestUser = new User({ email, password: hashedPassword });
+
+latestUser
+  .save()
+  .then(() => {
+    res.send("registered account!");
+    res.redirect("listings/login");
+  })
+  .catch((err) => console.log(err));
+});
+
+
+//logout
+app.get("/logout", authenticateUser, (req, res) => {
+    req.session.user = null;
+    res.redirect("/login");
+  });
+  
+
+// //Login
+// app.get('/listings/login',(req, res) => {
+//     res.render('listings/login');
+//     console.log("Hi");
+//     })
 
 // Form to add new listing
 app.get('/listings/new', (req, res) => {
