@@ -22,25 +22,17 @@ const listingSchema = new mongoose.Schema({
         required: true
     },
     date: {
-        type: String,
-        required: true
+        type:  Date,
     },
     reviews: {
-        type: Date,
+        type: String,
     }
+   
    
 })
 
-const UserSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  });
-  
-  module.exports = new mongoose.model("User", UserSchema);
-  module.exports = new mongoose.model("Listing", listingSchema)
+
+
+  const Listing = mongoose.model('Listing', listingSchema);
+  module.exports = Listing;
+

@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const Listing = require('./models/listing');
 
 mongoose
-.connect('mongodb://localhost:27017/dblisting', {  
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,})
+.connect('mongodb://localhost:27017/dblisting')
+// {  
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false,})
     .then(() => {
-        console.log("Your Connection is now open!");
+        console.log("Connection is open!");
     })
     .catch(err => {
         console.log("Error\n", err);
@@ -30,6 +31,9 @@ const seedListing = [
         price: 4000000.00,
         description: "The exclusive enclave of E Bay is perhaps the most coveted collection of bayfronts.",
         address: "BGC, Taguig City",
+        date: new Date()
+
+
 
     },
     {
@@ -38,10 +42,15 @@ const seedListing = [
         price: 2000000.00,
         description: "The exclusive enclave of E Bay is perhaps the most coveted collection of bayfronts.",
         address: "Forbes Park, Makati",
+        date: new Date()
+
+
     }
 ]
 
-Product.insertMany(seedListing)
+
+
+Listing.insertMany(seedListing)
     .then(res => {
         console.log(res);
     })

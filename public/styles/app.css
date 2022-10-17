@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:500');
 
-li, a, button, h1, h2, h3, p {
+.nav-wrapper{
+    background-color: black;
+    }
+
+li, a, button, h1, h2, h3, h4, h5, p {
     font-family: 'Trebuchet MS';
 }
 header{
@@ -8,6 +12,24 @@ header{
     justify-content: flex-end;
 }
 
-.nav{
-background-color: black;
+
+#btnNew{
+   background-color:black ; 
+   color: white;
+   width: 30%;
+}
+
+#img{
+    width: 20%;
+    height: 30%;
+}
+
+
+#map {
+    height: 400px;
+    width: 600px;
+} 
+
+.btn btn-success{
+    color: white;
 }

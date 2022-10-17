@@ -1,0 +1,4 @@
+Credentials (After Running seedUser.js)
+Email: syd@gmail.com or sample@email.com
+password: 1234
+

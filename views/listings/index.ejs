@@ -5,27 +5,23 @@
 
     <nav>
         <div class="nav-wrapper">
-          <a href="" class="brand-logo">Logo</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/listings">DigiHouse Corp</a></li>
             <li><a href="/listings/login">Login </a></li>
-            <li><a href="listings/reg">Sign up</a></li>
+            <li><a href="listings/register">Sign up</a></li>
+
           </ul>
         </div>
       </nav>
      
-      
+    
      <br>
      <br>
-     <div class="container mt-5">
-      <h1>WElcome to login and Register System!</h1>
-      <a href="/login" class="btn btn-primary">Login</a>
-      <a href="/register" class="btn btn-danger">Register</a>
-  </div>
+    
      <br>
     <div class="container center-align">
-    <h3>All Listings</h3>
-    <a href="/listings/new">Add New Listing</a>
+    <h3>ACTIVE LISTINGS</h3>
+   <button class="btn btn-success" id="btnNew"><a href="/listings/new">Add New Listing</a> </button> 
 
     <ul>
         <% for(let listing of listings) { %> 
@@ -40,7 +36,6 @@
 </div>
     
 
-  
 
 
    
